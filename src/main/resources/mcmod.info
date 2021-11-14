@@ -1,0 +1,16 @@
+[
+{
+  "modid": "tasrecorder",
+  "name": "TAS Recorder",
+  "description": "It records",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "mgnet.work",
+  "updateUrl": "",
+  "authorList": ["Pfannekuchen"],
+  "credits": "Me",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

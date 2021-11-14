@@ -1,0 +1,112 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "https://files.minecraftforge.net/maven" }
+        maven { url = "https://repo.spongepowered.org/maven" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'
+    }
+}
+
+plugins {
+    id 'com.github.johnrengelman.shadow' version '1.2.4'
+    id 'java'
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'org.spongepowered.mixin'
+
+version = "1.0.0-SNAPSHOT"
+group = "work.mgnet.tasrecorder"
+archivesBaseName = "tasrecorder"
+
+sourceCompatibility = targetCompatibility = '1.8'
+compileJava {
+    sourceCompatibility = targetCompatibility = '1.8'
+}
+
+minecraft {
+    version = "1.12.2-14.23.5.2838"
+    runDir = "run"
+    replace '${version}':project.version,'${mcversion}':project.minecraft.version
+    mappings = "snapshot_20171003"
+}
+
+configurations {
+    bundled
+    provided
+    // Make compile extend from our provided configuration so that things added to bundled end up on the compile classpath
+    compile.extendsFrom(bundled)
+}
+repositories {
+    mavenCentral()
+    maven {
+        name = 'sponge'
+        url = 'https://repo.spongepowered.org/maven'
+    }
+}
+jar {
+    from sourceSets.main.output
+    classifier = 'deobf'
+    manifest {
+        attributes 'FMLCorePluginContainsFMLMod': 'true',
+                   'FMLAT': 'tastickratechanger_at.cfg',
+                   'MixinConfigs': 'mixins.recorder.json',
+                   'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
+                   'ForceLoadAsMod': 'true'
+    }
+}
+
+dependencies {
+    compile('org.spongepowered:mixin:0.7.10-SNAPSHOT') {
+        exclude module: 'launchwrapper'
+        exclude module: 'guava'
+        exclude module: 'gson'
+        exclude module: 'commons-io'
+        exclude module: 'log4j-core'
+    }
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+sourceSets {
+    main {
+        ext.refMap = "mixins.recorder.refmap.json"
+    }
+
+}
+shadowJar {
+    mainSpec.sourcePaths.clear()
+
+    dependsOn reobfJar
+	
+	exclude(['me/**'])
+
+    configurations = [project.configurations.compile]
+    classifier "shadow"
+    exclude 'dummyThing'
+
+
+    afterEvaluate {
+        from zipTree(reobfJar.jar)
+    }
+}
+mixin {
+    // Specify "notch" or "searge" here
+    defaultObfuscationEnv searge
+    add sourceSets.main, "mixins.recorder.refmap.json"
+}

@@ -1,0 +1,13 @@
+# Cache/Project-Specific Files
+.gradle/
+.settings/
+.classpath
+.project
+
+# Forge Stuff
+run/
+*.launch
+
+# Build Directories
+build/
+bin/
