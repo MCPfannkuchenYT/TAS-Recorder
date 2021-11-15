@@ -2,13 +2,13 @@
 {
   "modid": "tasrecorder",
   "name": "TAS Recorder",
-  "description": "It records",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
+  "description": "It records. Nice right?",
+  "version": "1.0.0-SNAPSHOT",
+  "mcversion": "1.12.2",
   "url": "mgnet.work",
   "updateUrl": "",
-  "authorList": ["Pfannekuchen"],
-  "credits": "Me",
+  "authorList": ["Pancake"],
+  "credits": "Pancake",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
