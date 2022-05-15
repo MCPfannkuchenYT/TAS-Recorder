@@ -9,7 +9,7 @@ buildscript {
 }
 
 plugins {
-    id 'com.github.johnrengelman.shadow' version '1.2.4'
+    id 'com.github.johnrengelman.shadow' version '2.0.4'
     id 'java'
 }
 
@@ -20,7 +20,7 @@ group = "work.mgnet.tasrecorder"
 archivesBaseName = "tasrecorder"
 
 minecraft {
-    version = "1.12.2-14.23.5.2838"
+    version = "1.12.2-14.23.5.2847"
     mappings = "snapshot_20171003"
     runDir = "run"
 }

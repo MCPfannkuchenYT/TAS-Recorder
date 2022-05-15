@@ -23,7 +23,7 @@ public class RecordCommand extends CommandBase {
 	 */
 	@Override
 	public String getName() {
-		return "record";
+		return "recordvid";
 	}
 
 	/**
@@ -31,7 +31,7 @@ public class RecordCommand extends CommandBase {
 	 */
 	@Override
 	public String getUsage(ICommandSender sender) {
-		return "/record";
+		return "/recordvid";
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class RecordCommand extends CommandBase {
      */
     @Override
     public List<String> getAliases() {
-        return ImmutableList.of("record", "r");
+        return ImmutableList.of("recordvideo", "rv");
     }
     
     /**

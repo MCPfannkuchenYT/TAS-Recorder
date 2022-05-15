@@ -131,7 +131,7 @@ public class TASRecorder {
 		new Thread(() -> {
 			try {
 				// ffmpeg command line
-				String ffmpeg = "C:\\Users\\games\\Downloads\\ffmpeg-N-104544-gbfbd5954e5-win64-gpl\\ffmpeg-N-104544-gbfbd5954e5-win64-gpl\\bin\\ffmpeg.exe ";
+				String ffmpeg = "C:\\Users\\games\\.dotnet\\tools\\ffmpeg.exe ";
 				ffmpeg += "-y -hwaccel cuda -hwaccel_output_format cuda ";
 				ffmpeg += "-f rawvideo -c:v rawvideo ";
 				ffmpeg += "-s " + width + "x" + height + " -pix_fmt rgb24 -r 60 ";
